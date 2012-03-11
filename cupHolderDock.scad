@@ -15,7 +15,4 @@ module baseCylinder() {
 	translate(v=[0,0,depth/2]) cylinder(h = depth, r2 = topRadius, r1 = bottomRadius,center = true);
 }
 
-difference() {
-	baseCylinder();
-	translate(v=[0,0,depth/2]) cylinder(h = depth, r2 = topRadius-2, r1 = bottomRadius-2,center = true);
-}
+baseCylinder();
