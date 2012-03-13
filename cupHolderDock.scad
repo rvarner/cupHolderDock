@@ -52,6 +52,23 @@ module nexusBrick() {
 	import_stl("nexusCradleBrick.stl");
 }
 
+////////////////
+// Plug Brick //
+////////////////
+module plugBrick() {
+	import_stl("plugBrick.stl");
+}
+
+/////////////////////
+// Plug Path Brick //
+/////////////////////
+plugPathBrickLength = 65;
+module plugPathBrick() {
+	translate(v=[-18,0,-plugPathBrickLength/2]) import_stl("../nexusCradle/plugPathBrick.stl");
+}
+
+
+
 //////////
 // Dock //
 //////////
@@ -67,4 +84,30 @@ module dock() {
 	}
 }
 //galaxyNexus();
-dock();
+
+difference() {
+	dock();
+	translate(v=[0,0, (depth - cradleHeight) - rotationDelta]) 
+		rotate(a=[0,-tiltAngle,0]) translate(v=[0,0,-7]) plugBrick();
+	plugPathBrick();
+	translate(v=[-38,0,plugPathBrickLength/2]) plugPathBrick();
+}
+	
+difference() {
+	union() {
+		intersection () {
+			plugPathBrick();
+			translate(v=[-23,0,38]) rotate(a=[90,0,0]) cylinder(r=17, h = 80,center = true);
+		}
+		intersection () {
+			plugPathBrick();
+			translate(v=[-23,0,38]) rotate(a=[90,0,0]) cylinder(r=17, h = 80,center = true);
+			translate(v=[-25,0,29]) rotate(a=[90,0,0]) cylinder(r=8, h = 80,center = true);
+		}
+
+
+	}
+	translate(v=[-38,0,plugPathBrickLength/2]) plugPathBrick();
+}
+
+
