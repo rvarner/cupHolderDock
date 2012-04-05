@@ -35,7 +35,7 @@ module baseCylinder() {
 ///////////////////////
 cradleHeight = 24.5;
 module nexusCradle() {
-	import_stl("nexusCradleSimple_BackRest_NoAudio.stl");
+	import_stl("../nexusCradle/nexusCradleSimple_SideWalls_NoAudio1.stl");
 }
 
 //////////////////
@@ -79,35 +79,55 @@ module dock() {
 			translate(v=[0,0, (depth - cradleHeight) - rotationDelta]) 
 				rotate(a=[0,-tiltAngle,0]) galaxyNexus(); //nexusBrick();
 		}
-		translate(v=[0,0, (depth - cradleHeight) - rotationDelta]) 
+		translate(v=[0,0,0])translate(v=[0,0, (depth - cradleHeight) - rotationDelta]) 
 			rotate(a=[0,-tiltAngle,0]) nexusCradle();
 	}
 }
 //galaxyNexus();
 
-difference() {
-	dock();
-	translate(v=[0,0, (depth - cradleHeight) - rotationDelta]) 
-		rotate(a=[0,-tiltAngle,0]) translate(v=[0,0,-7]) plugBrick();
-	plugPathBrick();
-	translate(v=[-38,0,plugPathBrickLength/2]) plugPathBrick();
-}
-	
-difference() {
-	union() {
-		intersection () {
-			plugPathBrick();
-			translate(v=[-23,0,38]) rotate(a=[90,0,0]) cylinder(r=17, h = 80,center = true);
-		}
-		intersection () {
-			plugPathBrick();
-			translate(v=[-23,0,38]) rotate(a=[90,0,0]) cylinder(r=17, h = 80,center = true);
-			translate(v=[-25,0,29]) rotate(a=[90,0,0]) cylinder(r=8, h = 80,center = true);
-		}
-
-
+module everything() {
+  union() {
+	difference() {
+		dock();
+		translate(v=[0,0, (depth - cradleHeight) - rotationDelta]) 
+			rotate(a=[0,-tiltAngle,0]) translate(v=[0,0,-7]) plugBrick();
+		plugPathBrick();
+		translate(v=[-38,0,plugPathBrickLength/2]) plugPathBrick();
 	}
-	translate(v=[-38,0,plugPathBrickLength/2]) plugPathBrick();
+		
+	difference() {
+		union() {
+			intersection () {
+				plugPathBrick();
+				translate(v=[-23,0,38]) rotate(a=[90,0,0]) cylinder(r=17, h = 80,center = true);
+			}
+			intersection () {
+				plugPathBrick();
+				translate(v=[-23,0,38]) rotate(a=[90,0,0]) cylinder(r=17, h = 80,center = true);
+				translate(v=[-25,0,29]) rotate(a=[90,0,0]) cylinder(r=8, h = 80,center = true);
+			}
+	
+	
+		}
+		translate(v=[-38,0,plugPathBrickLength/2]) plugPathBrick();
+	}
+   }
 }
+
+
+
+// Slant to allow finger accessibility
+tY =  68.96; // Nexus thickness at base
+tX = 20;
+tZ = 8;
+module slant() {
+	translate(v=[0,0,tZ/2+58])rotate(a=[0,-tiltAngle,0]) cube([tX,tY,tZ],center=true);
+}
+
+difference() {
+	everything();
+	slant();	
+}
+
 
 
