@@ -115,8 +115,9 @@ module everything() {
 }
 
 
-
-// Slant to allow finger accessibility
+/////////////////////////////////////////
+// Slant to allow finger accessibility //
+/////////////////////////////////////////
 tY =  68.96; // Nexus thickness at base
 tX = 20;
 tZ = 8;
