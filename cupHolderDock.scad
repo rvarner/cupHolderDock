@@ -60,6 +60,13 @@ module plugBrick() {
 }
 
 /////////////////////
+// Audio Plug Male //
+/////////////////////
+module audioPlugMale() {
+	import_stl("../nexusCradle/audioPlugMale.stl");
+}
+
+/////////////////////
 // Plug Path Brick //
 /////////////////////
 plugPathBrickLength = 65;
@@ -85,8 +92,13 @@ module dock() {
 }
 //galaxyNexus();
 
+<<<<<<< HEAD
 module everything() {
   union() {
+=======
+/*
+module entireThing() {
+>>>>>>> Next gen dock.
 	difference() {
 		dock();
 		translate(v=[0,0, (depth - cradleHeight) - rotationDelta]) 
@@ -106,6 +118,7 @@ module everything() {
 				translate(v=[-23,0,38]) rotate(a=[90,0,0]) cylinder(r=17, h = 80,center = true);
 				translate(v=[-25,0,29]) rotate(a=[90,0,0]) cylinder(r=8, h = 80,center = true);
 			}
+<<<<<<< HEAD
 	
 	
 		}
@@ -123,12 +136,24 @@ tX = 20;
 tZ = 8;
 module slant() {
 	translate(v=[0,0,tZ/2+58])rotate(a=[0,-tiltAngle,0]) cube([tX,tY,tZ],center=true);
+=======
+		}
+		translate(v=[-38,0,plugPathBrickLength/2]) plugPathBrick();
+	}	
+>>>>>>> Next gen dock.
 }
+*/
 
 difference() {
+<<<<<<< HEAD
 	everything();
 	slant();	
 }
 
 
+=======
+	nexusCradle();
+	translate(v=[0,17,0]) audioPlugMale();
+}
+>>>>>>> Next gen dock.
 
